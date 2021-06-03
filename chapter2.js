@@ -57,10 +57,8 @@ for (let i = 1; i <= 100; i++) {
 // привязку size = 8 и измените программу так, чтобы она работала для любого
 // size, выводя сетку заданных ширины и высоты. 
 console.log('=== Chapter 2.3 Шахматная доска');
-function createChessboard(size, cellA, cellB) {
+function createChessboard(size, cellA = ' ', cellB = '#') {
   console.log(`Chessboard size = ${size}`);
-  if (cellA === undefined) cellA = ' ';
-  if (cellB === undefined) cellB = '#';
   for (let i = 0; i < size; i++) {
     if (i % 2 === 0) {
       createLine(cellA, cellB, size);
