@@ -72,6 +72,16 @@ function reverseArrayInPlace(arr) {
   }
 }
 
+// Book version 
+// function reverseArrayInPlace(array) {
+//   for (let i = 0; i < Math.floor(array.length / 2); i++) {
+//     let old = array[i];
+//     array[i] = array[array.length - 1 - i];
+//     array[array.length - 1 - i] = old;
+//   }
+//   return array;
+// }
+
 let array = [1, 2, 3, 4, 5];
 
 console.log(reverseArray(["A", "B", "C"]));             // ["C", "B", "A"]
@@ -81,8 +91,59 @@ reverseArrayInPlace(array);
 console.log('reverseArrayInPlace array = ', array);     // [5, 4, 3, 2, 1]
 //#endregion
 
-//#region Chapter 4.3
-console.log('=== Chapter 4.3 ');
+//#region Chapter 4.3 Список
+// Напишите функцию arrayToList, которая строит список, чья структура
+// подобна показанной, если передать функции массив [1, 2, 3] в качестве
+// аргумента. Напишите также функцию listToArray, создающую массив из
+// списка. Затем добавьте вспомогательную функцию prepend, принимающую
+// элемент и список и создающую новый список, в котором заданный элемент
+// добавлен в начало исходного списка. Кроме того, создайте функцию nth,
+// принимающую список и число и возвращающую элемент, находящийся в заданной 
+// позиции в этом списке (где ноль соответствует первому элементу),
+// или undefined, если элемента в заданной позиции не существует.
+// Если вам этого все еще недостаточно, напишите рекурсивную версию функции nth. 
+console.log('=== Chapter 4.3 Список');
+function arrayToList(array) {
+  let list = null;
+  array.reverse().map(item => (list = { value: item, rest: list }));
+  return list;
+}
+// option 1
+function listToArray(list, array = []) {
+  array.push(list.value);
+  if (list.rest !== null) {
+    return listToArray(list.rest, array);
+  }
+  return array;
+}
+// option 2
+// function listToArray(list) {
+//   let arr = [];
+//   for (let node = list; node; node = node.rest) {
+//     arr.push(node.value);
+//   }
+//   return arr;
+// }
+function prepend(value, list) {
+  return { value: value, rest: list };
+}
+function nth(list, num) {
+  if (num === 0) {
+    return list.value;
+  } else if (list.rest !== null) {
+    return nth(list.rest, num - 1);
+  }
+}
+
+console.log(arrayToList([10, 20, 30]));
+// {value: 10, rest: {value: 20, rest: null}}
+console.log(listToArray(arrayToList([10, 20, 30])));    // [10, 20, 30]
+console.log(prepend(15, prepend(25, null)));
+// {value: 15, rest: {value: 25, rest: null}}
+console.log(prepend(5, arrayToList([10, 20])));
+// {value: 5, rest: {value: 10, rest: {value: 20, rest: null}}}
+console.log(nth(arrayToList([10, 20, 30]), 1));         // 20
+console.log(nth(arrayToList([10, 20, 30]), 13));        // undefined
 //#endregion
 
 //#region Chapter 4.4 
