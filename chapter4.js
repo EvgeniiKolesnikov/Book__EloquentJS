@@ -146,6 +146,28 @@ console.log(nth(arrayToList([10, 20, 30]), 1));         // 20
 console.log(nth(arrayToList([10, 20, 30]), 13));        // undefined
 //#endregion
 
-//#region Chapter 4.4 
-console.log('=== Chapter 4.4 ');
+//#region Chapter 4.4 Глубокое сравнение
+// Напишите функцию deepEqual, которая принимает два значения и
+// возвращает true, только если это два одинаковых значения или это объекты,
+// свойства которых имеют одинаковые значения, если их сравнивать
+// рекурсивным вызовом deepEqual
+console.log('=== Chapter 4.4 Глубокое сравнение');
+function deepEqual(a, b) {
+  
+}
+function deepEqualEasy(a, b) {
+  if (JSON.stringify(a) === JSON.stringify(b)) return true;
+  else return false;
+}
+
+let obj = {here: {is: "an"}, object: 2};
+// console.log(deepEqual(obj, obj));                             // → true
+// console.log(deepEqual(obj, {here: 1, object: 2}));            // → false
+// console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));   // → true
+// console.log(deepEqual(obj, {object: 2, here: {is: "an"}}));   // → ??
+
+console.log(deepEqualEasy(obj, obj));                             // → true
+console.log(deepEqualEasy(obj, {here: 1, object: 2}));            // → false
+console.log(deepEqualEasy(obj, {here: {is: "an"}, object: 2}));   // → true
+console.log(deepEqualEasy(obj, {object: 2, here: {is: "an"}}));   // → false
 //#endregion
