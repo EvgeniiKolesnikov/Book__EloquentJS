@@ -153,7 +153,17 @@ console.log(nth(arrayToList([10, 20, 30]), 13));        // undefined
 // рекурсивным вызовом deepEqual
 console.log('=== Chapter 4.4 Глубокое сравнение');
 function deepEqual(a, b) {
-  
+  console.log('typeof a =', typeof a, a);
+  console.log('typeof b =', typeof b, b);
+  if (a === b) return true;
+  if (a == null || typeof a != "object" ||
+      b == null || typeof b != "object") return false;
+  let keysA = Object.keys(a), keysB = Object.keys(b);
+  if (keysA.length != keysB.length) return false;
+  for (let key of keysA) {
+    if (!keysB.includes(key) || !deepEqual(a[key], b[key])) return false;
+  }
+  return true;
 }
 function deepEqualEasy(a, b) {
   if (JSON.stringify(a) === JSON.stringify(b)) return true;
@@ -161,10 +171,18 @@ function deepEqualEasy(a, b) {
 }
 
 let obj = {here: {is: "an"}, object: 2};
-// console.log(deepEqual(obj, obj));                             // → true
-// console.log(deepEqual(obj, {here: 1, object: 2}));            // → false
-// console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));   // → true
-// console.log(deepEqual(obj, {object: 2, here: {is: "an"}}));   // → ??
+console.log(deepEqual(1, 1));                                 // → true
+console.log(deepEqual(1, 2));                                 // → false
+console.log(deepEqual(1, undefined));                         // → false
+console.log(deepEqual(1, null));                              // → false
+
+console.log(deepEqual(obj, undefined));                       // → false
+console.log(deepEqual(obj, null));                            // → false
+
+console.log(deepEqual(obj, obj));                             // → true
+console.log(deepEqual(obj, {here: 1, object: 2}));            // → false
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));   // → true
+console.log(deepEqual(obj, {object: 2, here: {is: "an"}}));   // → ?? true
 
 console.log(deepEqualEasy(obj, obj));                             // → true
 console.log(deepEqualEasy(obj, {here: 1, object: 2}));            // → false
