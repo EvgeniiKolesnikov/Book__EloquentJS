@@ -123,7 +123,7 @@ group.add(10);
 group.delete(10);
 group.delete(10);
 console.log(group.has(10));         // → false
-console.log('group = ', group);     // group: (5) [0, 5, 10, 15, 25]
+console.log('group = ', group);     // group: (5) [0, 5, 15, 20, 25]
 //#endregion
 
 //#region Chapter 6.3 Итерируемые группы
