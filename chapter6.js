@@ -164,5 +164,15 @@ for (let value of Group.from(["a", "b", "c"])) {
 //#endregion
 
 //#region Chapter 6.4 Заимствование метода
+// Ранее в этой главе я упоминал, что объект hasOwnProperty можно 
+// использовать как более надежную альтернативу оператору in, если мы хотим 
+// проигнорировать свойства прототипа. Но что, если нужно включить в словарь
+// слово hasOwnProperty? Тогда вы больше не сможете вызывать этот метод,
+// поскольку его значение будет скрыто за собственным свойством объекта.
+// Можете ли вы придумать способ вызова hasOwnProperty для объекта, 
+// у которого есть собственное свойство с таким именем? 
 console.log('=== Chapter 6.4 Заимствование метода');
+let map = {one: true, two: true, hasOwnProperty: true};
+// console.log(map.hasOwnProperty("one"));
+console.log(Object.prototype.hasOwnProperty.call(map, "one"));    // → true
 //#endregion
