@@ -80,7 +80,50 @@ console.log(new Vector(3, 4).length);                   // → 5
 
 
 //#region Chapter 6.2 Группы 
+// Напишите класс с именем Group (поскольку имя Set уже занято). Как и Set,
+// он располагает методами add, delete и has. Его конструктор создает пустую
+// группу, add добавляет в нее значение (но только если такого значения там
+// еще нет), метод delete удаляет свой аргумент из группы (если таковой там
+// был), а has возвращает логическое значение, указывающее, является ли его
+// аргумент членом группы.
+// Для того чтобы определить, одинаковы ли два значения, используйте оператор
+// === или какой-либо его эквивалент, например indexof.
+// Присвойте классу статический метод from, который принимает в качестве
+// аргумента итерируемый объект и создает группу, содержащую все значения,
+// полученные посредством перебора. 
 console.log('=== Chapter 6.2 Группы');
+class Group {
+  constructor() {
+    this.group = [];
+  }
+  add(value) {
+    if (!this.has(value)) this.group.push(value);
+  }
+  delete(value) {
+    let index = this.group.indexOf(value);
+    if (this.has(value)) this.group.splice(index, 1);
+  }
+  has(value) {
+    if (this.group.indexOf(value) !== -1) return true;
+    else return false;
+  }
+  static from(arr) {
+    let group = new Group();
+    arr.map(value => group.add(value));
+    return group;
+  }
+}
+
+let group = Group.from([0, 5, 10, 15, 20, 25]);
+console.log('group = ', group);     // group: (6) [0, 5, 10, 15, 20,  25]
+console.log(group.has(10));         // → true
+console.log(group.has(30));         // → false
+group.add(10); 
+group.add(10);
+group.delete(10);
+group.delete(10);
+console.log(group.has(10));         // → false
+console.log('group = ', group);     // group: (5) [0, 5, 10, 15, 25]
 //#endregion
 
 //#region Chapter 6.3 Итерируемые группы
