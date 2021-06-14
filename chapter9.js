@@ -1,5 +1,5 @@
 console.log('Chapter 9. Excercises');
-//#region Chapter 9.1
+//#region Chapter 9.1 Rеgехр-гольф
 // Для каждого из следующих элементов напишите регулярное выражение,
 // позволяющее проверить, встречается ли в строке какая-либо из указанных
 // подстрок. Регулярное выражение должно соответствовать только строкам,
@@ -14,9 +14,8 @@ console.log('Chapter 9. Excercises');
 // точка с запятой. 
 // 6. Слово длиннее шести букв.
 // 7. Слово без буквы е (или Е). 
-console.log('=== Chapter 9.1');
+console.log('=== Chapter 9.1 Rеgехр-гольф');
 // Fill in the regular expressions
-
 verify(/ca[rt]/,
   ["my car", "bad cats"],
   ["camper", "high art"]);
@@ -37,14 +36,13 @@ verify(/\s[.,:;]/,
   ["bad punctuation ."],
   ["escape the period"]);
 
-verify(/\w{7,}/,
+verify(/\w{7}/,
   ["Siebentausenddreihundertzweiundzwanzig"],
   ["no", "three small words"]);
 
 verify(/\b[^\We]+\b/i,
   ["red platypus", "wobbling nest"],
   ["earth bed", "learning ape", "BEET"]);
-
 
 function verify(regexp, yes, no) {
   // Ignore unfinished exercises
@@ -62,8 +60,19 @@ function verify(regexp, yes, no) {
 }
 //#endregion
 
-//#region Chapter 9.2
-console.log('=== Chapter 9.2');
+//#region Chapter 9.2 Стиль цитирования
+// Представьте, что вы написали рассказ и использовали одинарные кавычки
+// для обозначения прямой речи. Теперь вы хотите заменить все кавычки
+// в диалогах двойными кавычками, сохраняя при этом одинарные кавычки,
+// примененные в качестве апострофов, как в слове Д'Артаньян.
+// Подумайте, как сделать шаблон, который бы различал эти два вида 
+// использования кавычек, и создайте вызов метода replace, который бы выполнял
+// правильную замену
+console.log('=== Chapter 9.2 Стиль цитирования');
+let text = "'I'm the cook,' he said, 'it's my job.'";
+// Change this call.
+console.log(text.replace(/(^|\W)'|'(\W|$)/g, '$1"$2'));
+// → "I'm the cook," he said, "it's my job."
 //#endregion
 
 //#region Chapter 9.3
