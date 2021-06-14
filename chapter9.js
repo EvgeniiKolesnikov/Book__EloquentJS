@@ -17,15 +17,15 @@ console.log('Chapter 9. Excercises');
 console.log('=== Chapter 9.1');
 // Fill in the regular expressions
 
-verify(/car|cat/,
+verify(/ca[rt]/,
   ["my car", "bad cats"],
   ["camper", "high art"]);
 
-verify(/pop|prop/,
+verify(/pr?op/,
   ["pop culture", "mad props"],
   ["plop", "prrrop"]);
 
-verify(/ferret|ferry|ferrari/,
+verify(/ferr(et|y|ari)/,
   ["ferret", "ferry", "ferrari"],
   ["ferrum", "transfer A"]);
 
