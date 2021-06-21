@@ -66,8 +66,23 @@ function createTable(array) {
 mountains.innerHTML = createTable(MOUNTAINS)
 //#endregion
 
-//#region Chapter 14.2 
-console.log('=== Chapter 14.2');
+//#region Chapter 14.2 Элементы по имени тега
+// Метод document.getElementsByTagName возвращает все дочерние элементы
+// с заданным именем тега. Реализуйте собственную версию этого метода как
+// функцию, которая принимает в качестве аргументов узел и строку (имя тега) 
+// и возвращает массив, содержащий все узлы элемента-потомка с заданным именем тега.
+// Чтобы найти имя тега элемента, используйте его свойство nodeName. 
+// Но обратите внимание, что это свойство вернет имя тега в верхнем регистре. 
+// Чтобы это исправить, задействуйте методы для работы со строками - toLowercase
+// или toUpperCase.
+console.log('=== Chapter 14.2 Элементы по имени тега');
+function byTagName(node, tagName) {
+  // Your code here.
+}
+console.log(byTagName(document.body, "h1").length);     // → 1
+console.log(byTagName(document.body, "span").length);   // → 3
+let para = document.querySelector("p");
+console.log(byTagName(para, "span").length);            // → 2
 //#endregion
 
 //#region Chapter 14.3
