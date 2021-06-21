@@ -51,11 +51,15 @@ const MOUNTAINS = [
 ];
 
 function createTable(array) {
-  let table = `<table>
+  let table = 
+  `<table>
     <tr>${Object.keys(array[0]).map(thname => `<th>${thname}</th>`).join('')}</tr>
-    ${array.map(tr => `<tr>${Object.values(tr).map(td => `<td>${td}</td>`).join('')}</tr>`)}
-    </table>`
-  console.log(table);
+    ${array.map(tr => 
+    `<tr>${Object.values(tr)
+      .map(td => `<td ${typeof td === 'number' ? 'style="text-align: right"' : ''}>${td}</td>`)
+      .join('')}
+    </tr>`).join('')}
+  </table>`
   return table
 }
 
