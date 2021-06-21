@@ -53,6 +53,7 @@ const MOUNTAINS = [
 function createTable(array) {
   let table = `<table>
     <tr>${Object.keys(array[0]).map(thname => `<th>${thname}</th>`).join('')}</tr>
+    ${array.map(tr => `<tr>${Object.values(tr).map(td => `<td>${td}</td>`).join('')}</tr>`)}
     </table>`
   console.log(table);
   return table
