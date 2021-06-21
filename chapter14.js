@@ -77,7 +77,8 @@ mountains.innerHTML = createTable(MOUNTAINS)
 // или toUpperCase.
 console.log('=== Chapter 14.2 Элементы по имени тега');
 function byTagName(node, tagName) {
-  // Your code here.
+  // console.log(node.querySelectorAll(tagName));
+  return node.querySelectorAll(tagName)
 }
 console.log(byTagName(document.body, "h1").length);     // → 1
 console.log(byTagName(document.body, "span").length);   // → 3
