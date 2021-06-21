@@ -76,9 +76,22 @@ mountains.innerHTML = createTable(MOUNTAINS)
 // Чтобы это исправить, задействуйте методы для работы со строками - toLowercase
 // или toUpperCase.
 console.log('=== Chapter 14.2 Элементы по имени тега');
-function byTagName(node, tagName) {
-  // console.log(node.querySelectorAll(tagName));
-  return node.querySelectorAll(tagName)
+function byTagName(node, tagName = tagName.toUpperCase()) {
+  let elements = []
+  function find(node) {
+    for (let i = 0; i < node.childNodes.length; i++) {
+      let child = node.childNodes[i];
+      if (child.nodeType === document.ELEMENT_NODE) {
+        if (child.nodeName === tagName.toUpperCase()) {
+          elements.push(child);
+        }
+        find(child);
+      }
+    } 
+  }
+  find(node);
+  console.log(elements);
+  return elements;
 }
 console.log(byTagName(document.body, "h1").length);     // → 1
 console.log(byTagName(document.body, "span").length);   // → 3
