@@ -99,10 +99,32 @@ let para = document.querySelector("p");
 console.log(byTagName(para, "span").length);            // → 2
 //#endregion
 
-//#region Chapter 14.3
-console.log('=== Chapter 14.3');
-//#endregion
+//#region Chapter 14.3 Кошка и ее шляпа 
+// Расширьте описанную ранее функцию анимации с кошкой, чтобы по разные
+// стороны эллипса вращались кошка и ее шляпа (<img src = "img/hat.png">).
+// Или пускай шляпа вращается вокруг кошки. Или измените анимацию
+// другим интересным способом.
+// Чтобы упростить позиционирование нескольких объектов, возможно, 
+// стоит переключиться на абсолютное позиционирование. Тогда значения top
+// и left будут отсчитываться относительно верхнего левого края документа.
+// Чтобы избежать использования отрицательных координат, из-за которых
+// изображение выходит за пределы видимой страницы, можно прибавить
+// к значениям позиции фиксированное количество пикселов.
+console.log('=== Chapter 14.3 Кошка и ее шляпа');
+let cat = document.querySelector("#cat");
+let hat = document.querySelector("#hat");
 
-//#region Chapter 14.4
-console.log('=== Chapter 14.4');
+let angle = 0;
+let lastTime = null;
+function animate(time) {
+  if (lastTime != null) angle += (time - lastTime) * 0.001;
+  lastTime = time;
+  cat.style.top = (Math.sin(angle) * 40 + 40) + "px";
+  cat.style.left = (Math.cos(angle) * 200 + 230) + "px";
+
+  // Your extensions here.
+
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
 //#endregion
