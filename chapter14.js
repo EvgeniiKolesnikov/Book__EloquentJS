@@ -116,15 +116,20 @@ let hat = document.querySelector("#hat");
 
 let angle = 0;
 let lastTime = null;
+let catSpeed = 1;
+let hatSpeed = 20;
+
 function animate(time) {
   if (lastTime != null) angle += (time - lastTime) * 0.001;
   lastTime = time;
-  cat.style.top = (Math.sin(angle) * 40 + 40) + "px";
-  cat.style.left = (Math.cos(angle) * 200 + 230) + "px";
-
+  cat.style.top = (Math.sin(angle*catSpeed) * 40 + 100)  + "px";
+  cat.style.left = (Math.cos(angle*catSpeed) * 200 + 250)  + "px";
+  hat.style.top = cat.y + (Math.sin(angle*hatSpeed) * 20 + 1) + "px";
+  hat.style.left = cat.x + (Math.cos(angle*hatSpeed) * 20 + 1) + "px";
   // Your extensions here.
 
   requestAnimationFrame(animate);
 }
+
 requestAnimationFrame(animate);
 //#endregion
