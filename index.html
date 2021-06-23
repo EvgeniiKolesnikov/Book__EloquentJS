@@ -25,15 +25,27 @@
   <!-- <script src="./chapter10.js" defer></script> -->
   <!-- <script src="./chapter11.js" defer></script> -->
   <!-- <script src="./chapter12.js" defer></script> -->
-  <script src="./chapter14.js" defer></script>
+  <!-- <script src="./chapter14.js" defer></script> -->
+  <!-- <script src="./chapter15.js" defer></script> -->
+  <style>
+    #progress {
+      border-bottom: 3px solid rgb(255, 187, 0);
+      width: 0;
+      position: fixed;
+      top: 0; left: 0;
+    }
+  </style>
 </head>
 
 <body style="background-color: #333;">
+  <header class="header">
+    <div>Exercises</div>
+    <hr>
+  </header>
   <div id="mountains"></div>
   <p>One</p>
   <p>Two</p>
   <p>Three</p>
-
   <blockquote id="quote">
     No book can ever be finished. While working on it we learn
     just enough to find it immature the moment we turn away
@@ -51,18 +63,22 @@
   <p>Tell 'em a <span class="character">hookah smoking
     <span class="animal">caterpillar</span></span></p>
   <p>Has given you the call</p>
-
-  <header class="header">
-    <div>Exercises</div>
-    <hr>
-  </header>
   <p style="text-align: center">
-    <img src="img/cat.png" style="position: relative">
+    <!-- <img src="img/cat.png" style="position: relative"> -->
   </p>
-  <main class="page">
-    
-  </main>
-  <footer class="footer"></footer>
+
+  <button>Act-once button</button>
+  <p id="para">A paragraph with a <button id="button">button</button>.</p>
+
+  <p>Drag the bar to change its width:</p>
+  <div id="progressBar" style="background: orange; width: 60px; height: 20px"></div>
+
+  <div id="progress"></div>
+
+  <p>Name: <input type="text" data-help="Your full name"></p>
+  <p>Age: <input type="text" data-help="Your age in years"></p>
+  <p id="help"></p>
+
 </body>
 
 </html>
