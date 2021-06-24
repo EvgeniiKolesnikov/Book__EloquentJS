@@ -18,6 +18,36 @@ console.log('Chapter 15. Excercises');
 // шарика на смайлик 💥 с одновременным удалением обработчика события
 // (так что вы не сможете больше надувать или сдувать лопнувший шарик). 
 console.log('=== Chapter 15.1 Воздушный шарик');
+const defaultSize = '16px'
+const changeRatio = 0.1;
+
+window.addEventListener("keydown", changeSize)
+function changeSize(e) {
+  e.preventDefault()
+  const ball = document.querySelectorAll('p')
+  const balls = Array.from(ball)
+  let changeSize = 0
+  // console.log(e.key);
+  // console.log(ball);
+  // console.log(balls);
+  if (e.key === 'ArrowUp') {
+    console.log('up');
+    changeSize = 1 + changeRatio
+  }
+  if (e.key === 'ArrowDown') {
+    console.log('down');
+    changeSize = 1 - changeRatio
+  }
+  for (const ball of balls) {
+    let fontSize = ball.style.fontSize === '' ? defaultSize : ball.style.fontSize
+    fontSize = Number(fontSize.substr(0, fontSize.length - 2))
+    let newSize = (fontSize * changeSize).toFixed(2)
+    console.log(fontSize, newSize);
+    ball.style.fontSize = `${newSize}px`
+  }
+}
+
+
 
 //#endregion
 
