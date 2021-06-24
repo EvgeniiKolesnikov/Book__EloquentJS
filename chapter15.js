@@ -20,35 +20,30 @@ console.log('Chapter 15. Excercises');
 console.log('=== Chapter 15.1 Воздушный шарик');
 const defaultSize = '16px'
 const changeRatio = 0.1;
+const maxSize = 150;
 
 window.addEventListener("keydown", changeSize)
 function changeSize(e) {
   e.preventDefault()
   const ball = document.querySelectorAll('p')
   const balls = Array.from(ball)
-  let changeSize = 0
-  // console.log(e.key);
-  // console.log(ball);
-  // console.log(balls);
-  if (e.key === 'ArrowUp') {
-    console.log('up');
-    changeSize = 1 + changeRatio
-  }
-  if (e.key === 'ArrowDown') {
-    console.log('down');
-    changeSize = 1 - changeRatio
-  }
+  let changePercent = 0
+  if (e.key === 'ArrowUp') changePercent = 1 + changeRatio
+  if (e.key === 'ArrowDown') changePercent = 1 - changeRatio
   for (const ball of balls) {
     let fontSize = ball.style.fontSize === '' ? defaultSize : ball.style.fontSize
     fontSize = Number(fontSize.substr(0, fontSize.length - 2))
-    let newSize = (fontSize * changeSize).toFixed(2)
-    console.log(fontSize, newSize);
+    let newSize = (fontSize * changePercent).toFixed(2)
+    // console.log(fontSize, newSize);
+    if (newSize > maxSize) {
+      ball.textContent = '💥'
+      ball.style.fontSize = `${maxSize}px`
+      window.removeEventListener("keydown", changeSize)
+      return
+    }
     ball.style.fontSize = `${newSize}px`
   }
 }
-
-
-
 //#endregion
 
 //#region Chapter 15.2 След мыши
