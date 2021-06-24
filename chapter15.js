@@ -65,22 +65,27 @@ function changeSize(e) {
 // положение мыши всякий раз, когда происходит событие mousemove. 
 console.log('=== Chapter 15.2 След мыши');
 const countTrails = 77
+let currentTrail = 0
 let trails = []
 
 window.addEventListener("mousemove", moved);
 function moved(e) {
-  // console.log(e);
-  if (trails.length > countTrails) {
-    trails[0].remove()
-    trails.shift()
-  } 
-  let trail = document.createElement('div')
-  trail.classList = 'trail'
-  trail.style.cursor = 'none'
-  trail.style.left = (e.pageX - 3) + 'px'
-  trail.style.top = (e.pageY - 3) + 'px'
-  document.body.appendChild(trail)
-  trails.push(trail)
+  // console.log(e)
+  let trail = null
+  if (trails.length < countTrails) {
+    trail = document.createElement('div')
+    trail.classList = 'trail'
+    trail.style.cursor = 'none'
+    trail.style.left = (e.pageX - 3) + 'px'
+    trail.style.top = (e.pageY - 3) + 'px'
+    document.body.appendChild(trail)
+    trails.push(trail)
+  } else {
+    trail = trails[currentTrail]
+    trail.style.left = (e.pageX - 3) + 'px'
+    trail.style.top = (e.pageY - 3) + 'px'
+    currentTrail = (currentTrail + 1) % trails.length
+  }
 }
 //#endregion
 
