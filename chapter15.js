@@ -75,15 +75,15 @@ function moved(e) {
   if (trails.length < countTrails) {
     trail = document.createElement('div')
     trail.classList = 'trail'
-    trail.style.cursor = 'none'
+    // trail.style.cursor = 'none'
     trail.style.left = (e.pageX - 3) + 'px'
     trail.style.top = (e.pageY - 3) + 'px'
     document.body.appendChild(trail)
     trails.push(trail)
   } else {
     trail = trails[currentTrail]
-    trail.style.left = (e.pageX - 3) + 'px'
-    trail.style.top = (e.pageY - 3) + 'px'
+    trail.style.left = (e.pageX + 33) + 'px'
+    trail.style.top = (e.pageY + 33) + 'px'
     currentTrail = (currentTrail + 1) % trails.length
   }
 }
@@ -106,5 +106,28 @@ function moved(e) {
 // Когда это заработает, дополните интерфейс, чтобы кнопка выбранной
 // вкладки имела другой стиль и чтобы было понятно, какая вкладка выбрана. 
 console.log('=== Chapter 15.3 Вкладки');
+function asTabs(node) {
+  let tabs = Array.from(node.children).map(node => {
+    let button = document.createElement("button");
+    button.textContent = node.getAttribute("data-tabname");
+    let tab = {button, node};
+    button.addEventListener("click", () => selectTab(tab));
+    return tab;
+  });
 
+  let tabList = document.createElement("div");
+  for (let {button} of tabs) tabList.appendChild(button);
+  node.insertBefore(tabList, node.firstChild);
+
+  function selectTab(selectedTab) {
+    for (let tab of tabs) {
+      let selected = tab == selectedTab;
+      tab.node.style.display = selected ? "" : "none";
+      tab.button.style.color = selected ? "red" : "";
+    }
+  }
+  selectTab(tabs[0]);
+}
+
+asTabs(document.querySelector("tab-panel"));
 //#endregion
