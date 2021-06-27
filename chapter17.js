@@ -19,8 +19,17 @@ let results = [
 // Math.cos и Math.sin в главе 14, где показано, как с помощью этих функций
 // можно получить координаты точки, расположенной на окружности
 console.log('=== Chapter 17.1 Фигуры');
-let cx1 = document.querySelector("#canvas1").getContext("2d");
-// Your code here.
+function createTrapezoid(a, b, h, x0 = 0, y0 = 0) {
+  let cx1 = document.querySelector("#canvas1").getContext("2d");
+  cx1.beginPath();
+  cx1.moveTo(x0, y0);
+  cx1.lineTo(x0 + a, y0);
+  cx1.lineTo(x0 + a + (b-a)/2, y0 + h);
+  cx1.lineTo(x0 - (b-a)/2, y0 + h);
+  cx1.closePath();  // or like that  cx1.moveTo(x0, y0);
+  cx1.stroke();
+}
+createTrapezoid(50, 100, 50, 40, 10)
 
 //#endregion
 
