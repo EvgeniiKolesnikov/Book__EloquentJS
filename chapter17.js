@@ -19,31 +19,40 @@ let results = [
 // Math.cos и Math.sin в главе 14, где показано, как с помощью этих функций
 // можно получить координаты точки, расположенной на окружности
 console.log('=== Chapter 17.1 Фигуры');
-function createTrapezoid(a, b, h, x0 = 0, y0 = 0) {
+function createTrapezoid(x = 0, y = 0, a, b, h) {
   let cx1 = document.querySelector("#canvas1").getContext("2d");
   cx1.beginPath();
-  cx1.moveTo(x0 + (b-a)/2, y0);
-  cx1.lineTo(x0 + (b-a)/2 + a, y0);
-  cx1.lineTo(x0 + b, y0 + h);
-  cx1.lineTo(x0 , y0 + h);
+  cx1.moveTo(x + (b-a)/2, y);
+  cx1.lineTo(x + (b-a)/2 + a, y);
+  cx1.lineTo(x + b, y + h);
+  cx1.lineTo(x , y + h);
   cx1.closePath();
   cx1.stroke();
 }
-createTrapezoid(50, 100, 50, 10, 10)
+createTrapezoid(10, 10, 50, 100, 50)
 
-function createRhombus(l, x0 = 0, y0 = 0) {
+function createRhombus(x = 0, y = 0, l) {
   let cx1 = document.querySelector("#canvas1").getContext("2d");
   cx1.beginPath();
-  cx1.translate(x0 + l, y0 + l);
+  cx1.translate(x + l, y + l);
   cx1.rotate(Math.PI / 4);
   cx1.fillStyle = "red";
   cx1.fillRect(-l, -l, l*2, l*2);
   cx1.resetTransform();
 }
-createRhombus(20, 150, 10)
+createRhombus(150, 10, 20)
 
-
-
+function createZigzag(x, y, l, h) {
+  let cx1 = document.querySelector("#canvas1").getContext("2d");
+  cx1.beginPath();
+  cx1.moveTo(x, y);
+  for (let i = 0; i < 6; i++) {
+    cx1.lineTo(x + l, y + i * h + h/2);
+    cx1.lineTo(x, y + i * h + h);
+  }
+  cx1.stroke();
+}
+createZigzag(230, 10, 70, 8);
 //#endregion
 
 //#region Chapter 17.2 Круговая диаграмма
