@@ -61,14 +61,32 @@ function createSpiral(x, y, r) {
   cx1.beginPath();
   cx1.moveTo(xCenter, yCenter);
   for (let i = 0; i < 300; i++) {
-    let angle = i * Math.PI / 40;
+    let angle = i * Math.PI / 30;
     let dist = r * i / 200;
     cx1.lineTo(xCenter + Math.sin(angle) * dist,
               yCenter + Math.cos(angle) * dist);
   }
   cx1.stroke();
 }
-createSpiral(350, 20, 20);
+createSpiral(350, 10, 20);
+
+function createStar(x, y, r) {
+  let cx1 = document.querySelector("#canvas1").getContext("2d");
+  let xCenter = x + r
+  let yCenter = y + r;
+  cx1.beginPath();
+  cx1.moveTo(xCenter + r, yCenter);
+  for (let i = 1; i <= 8; i++) {
+    let angle = i * Math.PI / 4;
+    cx1.quadraticCurveTo(xCenter, yCenter,
+                        xCenter + Math.cos(angle) * r,
+                        yCenter + Math.sin(angle) * r);
+  }
+  cx1.fillStyle = "gold";
+  cx1.fill();
+}
+createStar(430, -10, 40);
+
 
 //#endregion
 
