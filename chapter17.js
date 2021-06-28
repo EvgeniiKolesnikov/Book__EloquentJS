@@ -53,6 +53,23 @@ function createZigzag(x, y, l, h) {
   cx1.stroke();
 }
 createZigzag(230, 10, 70, 8);
+
+function createSpiral(x, y, r) {
+  let xCenter = x + r;
+  let yCenter = y + r;
+  let cx1 = document.querySelector("#canvas1").getContext("2d");
+  cx1.beginPath();
+  cx1.moveTo(xCenter, yCenter);
+  for (let i = 0; i < 300; i++) {
+    let angle = i * Math.PI / 40;
+    let dist = r * i / 200;
+    cx1.lineTo(xCenter + Math.sin(angle) * dist,
+              yCenter + Math.cos(angle) * dist);
+  }
+  cx1.stroke();
+}
+createSpiral(350, 20, 20);
+
 //#endregion
 
 //#region Chapter 17.2 Круговая диаграмма
