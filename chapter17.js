@@ -22,14 +22,27 @@ console.log('=== Chapter 17.1 Фигуры');
 function createTrapezoid(a, b, h, x0 = 0, y0 = 0) {
   let cx1 = document.querySelector("#canvas1").getContext("2d");
   cx1.beginPath();
-  cx1.moveTo(x0, y0);
-  cx1.lineTo(x0 + a, y0);
-  cx1.lineTo(x0 + a + (b-a)/2, y0 + h);
-  cx1.lineTo(x0 - (b-a)/2, y0 + h);
-  cx1.closePath();  // or like that  cx1.moveTo(x0, y0);
+  cx1.moveTo(x0 + (b-a)/2, y0);
+  cx1.lineTo(x0 + (b-a)/2 + a, y0);
+  cx1.lineTo(x0 + b, y0 + h);
+  cx1.lineTo(x0 , y0 + h);
+  cx1.closePath();
   cx1.stroke();
 }
-createTrapezoid(50, 100, 50, 40, 10)
+createTrapezoid(50, 100, 50, 10, 10)
+
+function createRhombus(l, x0 = 0, y0 = 0) {
+  let cx1 = document.querySelector("#canvas1").getContext("2d");
+  cx1.beginPath();
+  cx1.translate(x0 + l, y0 + l);
+  cx1.rotate(Math.PI / 4);
+  cx1.fillStyle = "red";
+  cx1.fillRect(-l, -l, l*2, l*2);
+  cx1.resetTransform();
+}
+createRhombus(20, 150, 10)
+
+
 
 //#endregion
 
