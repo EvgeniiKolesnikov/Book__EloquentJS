@@ -86,8 +86,6 @@ function createStar(x, y, r) {
   cx1.fill();
 }
 createStar(430, -10, 40);
-
-
 //#endregion
 
 //#region Chapter 17.2 Круговая диаграмма
@@ -97,21 +95,31 @@ createStar(430, -10, 40);
 // Попробуйте подобрать приятный на вид способ автоматического позиционирования 
 // этого текста, который бы работал для других наборов данных. 
 console.log('=== Chapter 17.2 Круговая диаграмма');
-let cx2 = document.querySelector("#canvas2").getContext("2d");
-let total = results.reduce((sum, {count}) => sum + count, 0);
-let currentAngle = -0.5 * Math.PI;
-let centerX = 300, centerY = 150;
-
-// Add code to draw the slice labels in this loop.
-for (let result of results) {
-  let sliceAngle = (result.count / total) * 2 * Math.PI;
-  cx2.beginPath();
-  cx2.arc(centerX, centerY, 100, currentAngle, currentAngle + sliceAngle);
-  currentAngle += sliceAngle;
-  cx2.lineTo(centerX, centerY);
-  cx2.fillStyle = result.color;
-  cx2.fill();
+function createRoundDiagram(x, y, r = 100) {
+  let cx = document.querySelector("#canvas2").getContext("2d");
+  let total = results.reduce((sum, {count}) => sum + count, 0);
+  let currentAngle = -0.5 * Math.PI;
+  let centerX = x, centerY = y;
+  for (let result of results) {
+    let sliceAngle = (result.count / total) * 2 * Math.PI;
+    cx.beginPath();
+    cx.arc(centerX, centerY, r, currentAngle, currentAngle + sliceAngle);
+    cx.lineTo(centerX, centerY);
+    cx.fillStyle = result.color;
+    cx.fill();
+    // text
+    cx.fillStyle = result.color;
+    cx.font = "18px Arial";
+    const middleAngle = currentAngle + 0.5 * sliceAngle;
+    cx.textAlign = Math.cos(middleAngle) > 0 ? "left" : "right";
+    cx.fillText(`"${result.name}"`, 
+      centerX + r * 1.2 * Math.cos(middleAngle), 
+      centerY + r * 1.2 * Math.sin(middleAngle));
+    // nextAngle
+    currentAngle += sliceAngle;
+  }
 }
+createRoundDiagram(300, 150, 100);
 //#endregion
 
 //#region Chapter 17.3 Прыгающий шарик
