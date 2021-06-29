@@ -1,59 +1,5 @@
 console.log('Chapter 18. Excercises');
 
-//#region Chapter 18.0 Default Example
-let list = document.querySelector("select");
-let note = document.querySelector("textarea");
-let state;
-
-function setState(newState) {
-  list.textContent = "";
-  for (let name of Object.keys(newState.notes)) {
-    let option = document.createElement("option");
-    option.textContent = name;
-    if (newState.selected == name) option.selected = true;
-    list.appendChild(option);
-  }
-  note.value = newState.notes[newState.selected];
-
-  localStorage.setItem("Notes", JSON.stringify(newState));
-  state = newState;
-}
-
-setState(JSON.parse(localStorage.getItem("Notes")) || {
-  notes: {
-    "shopping list": "Carrots\nRaisins"
-  },
-  selected: "shopping list"
-});
-
-list.addEventListener("change", () => {
-  setState({
-    notes: state.notes,
-    selected: list.value
-  });
-});
-
-note.addEventListener("change", () => {
-  setState({
-    notes: Object.assign({}, state.notes, {
-      [state.selected]: note.value
-    }),
-    selected: state.selected
-  });
-});
-
-document.querySelector("button").addEventListener("click", () => {
-  let name = prompt("Note name");
-  if (name) setState({
-    notes: Object.assign({}, state.notes, {
-      [name]: ""
-    }),
-    selected: name
-  });
-});
-//#endregion
-
-
 //#region Chapter 18.1 Согласование содержимого 
 // Одна из вещей, которую позволяет делать НТТР, называется согласованием
 // содержимого. Заголовок запроса Accept используется для указания серверу,
@@ -62,7 +8,7 @@ document.querySelector("button").addEventListener("click", () => {
 // ресурса, он может просмотреть этот заголовок и отправить тот вариант,
 // который предпочитает клиент.
 
-// URL-aдpec https://eloquent;javascript.net/author 
+// URL-aдpec https://eloquentjavascript.net/author
 // настроен для ответа в формате открытого текста, HTML илиJSОN, 
 // в зависимости от того, что запрашивает
 // клиент. Эти форматы идентифицируются стандартными типами данных
@@ -74,7 +20,20 @@ document.querySelector("button").addEventListener("click", () => {
 // Наконец, попробуйте запросить тип носителя application/rainbows+unicorns
 // и посмотрите, какой код состояния получите. 
 console.log('=== Chapter 18.1 Согласование содержимого');
+const URL = "https://eloquentjavascript.net/author";
+const types = ["text/plain", "text/html", "application/json", 
+  "application/rainbows+unicorns"];
 
+async function showTypes() {
+  for (let type of types) {
+    let response = await fetch(URL, {headers: {Accept: type}});
+    let text = await response.text()
+    console.log(`${type}: ${text}\n`);
+    document.querySelector('#types').innerHTML += 
+    `<p><b>${type}:</b> ${text}</p>`
+  }
+}
+showTypes();
 //#endregion
 
 
