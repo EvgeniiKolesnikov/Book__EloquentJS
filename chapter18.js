@@ -46,7 +46,17 @@ showTypes();
 // Преобразуйте возвращаемое значение функции или возникшую 
 // ошибку в строку и отображайте ее под текстовым полем. 
 console.log('=== Chapter 18.2 Среда выполнения JavaScript');
-
+const runBtn = document.querySelector("#button");
+runBtn.addEventListener("click", () => {
+  let jsCode = document.querySelector("#code").value;
+  let outputNode = document.querySelector("#output");
+  try {
+    let result = Function(jsCode)();
+    outputNode.innerHTML = String(result);
+  } catch (e) {
+    outputNode.innerHTML = "Error: " + e;
+  }
+});
 //#endregion
 
 
